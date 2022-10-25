@@ -1,7 +1,7 @@
 ARG ALPINE_VERSION=3.16
 FROM alpine:${ALPINE_VERSION}
-LABEL Maintainer="Tim de Pater <code@trafex.nl>"
-LABEL Description="Lightweight container with Nginx 1.22 & PHP 8.1 based on Alpine Linux."
+LABEL Maintainer="Daniel-dan1"
+LABEL Description="Lightweight container with Nginx 1.22 & PHP 8 based on Alpine Linux."
 # Setup document root
 WORKDIR /var/www/html
 
@@ -24,6 +24,7 @@ RUN apk add --no-cache \
   php8-session \
   php8-xml \
   php8-xmlreader \
+  php8-xmlwriter \
   php8-simplexml \
   supervisor \
   sudo
@@ -46,8 +47,8 @@ RUN chown -R nobody.nobody /var/www/html /run /var/lib/nginx /var/log/nginx
 # RUN chown -R root.root /var/www/html /run /var/lib/nginx /var/log/nginx
 
 # config user nobody to be a sudoer
-RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
-RUN adduser nobody wheel
+# RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
+# RUN adduser nobody wheel
 
 # Switch to use a non-root user from here on
 USER nobody

@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+
+  db-dan:
+    image: mariadb:latest
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-dan:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: 87M0yPGStt!D6cWg%9%$p
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wp-user
+      MARIADB_PASSWORD: 5@8HuT5g36!isBpWd2lx
+
+  wp-dan:
+    image: alpine-nginx-php:v0.1
+    ports:
+      - 8088:8080
+    volumes:
+      - wp-dan:/var/www/html
+    environment:
+      DB_HOST: db-dan
+      DB_NAME: wordpress
+      DB_USER: wp-user
+      DB_PASSWORD: 5@8HuT5g36!isBpWd2lx
+      WORDPRESS_SITE_URL: http://localhost
+      FS_METHOD: direct
+      # For debugging only:
+      #WP_DEBUG: "true"
+      #WP_DEBUG_DISPLAY: "true"
+
+
+volumes:
+  mysql-dan:
+  wp-dan:
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+        driver: default
+        config:
+        - subnet: 192.168.101.0/24
