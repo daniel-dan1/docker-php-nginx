@@ -27,7 +27,9 @@ RUN apk add --no-cache \
   php8-xmlwriter \
   php8-simplexml \
   supervisor \
-  sudo
+  sudo \
+  zip \
+  unzip
 
 # Create symlink so programs depending on `php` still function
 # RUN ln -s /usr/bin/php8 /usr/bin/php
