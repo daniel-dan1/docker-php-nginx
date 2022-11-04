@@ -17,7 +17,7 @@ services:
   wp-dan:
     image: alpine-nginx-php:v0.1
     ports:
-      - 8088:8080
+      - 80:8080
     volumes:
       - wp-dan:/var/www/html
     environment:
